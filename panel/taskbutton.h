@@ -39,7 +39,6 @@ class TaskButton : public QToolButton
 public:
     TaskButton(const WId window, QWidget * parent);
 
-    void updateText();
     void updateIcon();
 
     QSize sizeHint() const override;
