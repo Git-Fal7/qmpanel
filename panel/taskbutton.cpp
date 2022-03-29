@@ -41,10 +41,9 @@ TaskButton::TaskButton(const WId window, QWidget * parent)
     : QToolButton(parent), mWindow(window)
 {
     setCheckable(true);
-    setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+    setToolButtonStyle(Qt::ToolButtonIconOnly);
     setAcceptDrops(true);
 
-    updateText();
     updateIcon();
 
     if (KWindowSystem::activeWindow() == window)
@@ -66,17 +65,6 @@ TaskButton::TaskButton(const WId window, QWidget * parent)
     });
 }
 
-void TaskButton::updateText()
-{
-    KWindowInfo info(mWindow, NET::WMVisibleName | NET::WMName);
-    QString title = info.visibleName();
-    if (title.isEmpty())
-        title = info.name();
-
-    setText(title.replace("&", "&&"));
-    setToolTip(title);
-}
-
 void TaskButton::updateIcon()
 {
     int size = style()->pixelMetric(QStyle::PM_ToolBarIconSize);
@@ -86,7 +74,7 @@ void TaskButton::updateIcon()
 
 QSize TaskButton::sizeHint() const
 {
-    return {2 * logicalDpiX(), QToolButton::sizeHint().height()};
+    return {QToolButton::sizeHint().width() + 5, QToolButton::sizeHint().height()};
 }
 
 void TaskButton::dragEnterEvent(QDragEnterEvent * event)
