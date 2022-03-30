@@ -49,5 +49,6 @@ ClockLabel::ClockLabel(QWidget * parent)
 
 void ClockLabel::timerEvent(QTimerEvent *)
 {
-    setText(QDateTime::currentDateTime().toString("ddd MMM d, h:mm a"));
+    setText(QDateTime::currentDateTime().toString("h:mm a"));
+    setToolTip(QDateTime::currentDateTime().toString("dddd MMMM d"));
 }
