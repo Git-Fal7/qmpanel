@@ -151,8 +151,6 @@ void TaskBar::onWindowChanged(WId window, NET::Properties prop,
     if (pos == mKnownWindows.end())
         return;
 
-    if (prop.testFlag(NET::WMVisibleName) || prop.testFlag(NET::WMName))
-        pos->second->updateText();
     if (prop.testFlag(NET::WMIcon))
         pos->second->updateIcon();
 }
