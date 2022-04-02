@@ -5,7 +5,9 @@ pkgver=0.1
 pkgrel=1
 pkgdesc="A Minimal Qt-Based Desktop Panel"
 arch=("x86_64")
-url="https://github.com/jlindgren90/qmpanel"
+url="https://github.com/git-fal7/$pkgname"
+source=("$pkgname::git+$url.git")
+sha512sums=('SKIP')
 license=("LGPL2.1")
 makedepends=("cmake")
 depends=(
@@ -18,13 +20,15 @@ depends=(
 )
 
 build() {
-	mkdir -p ../build
-	cd ../build
+	cd "$pkgname"
+	mkdir -p build
+	cd build
 	cmake .. -DCMAKE_INSTALL_PREFIX=/usr
 	make
 }
 
 package() {
-	cd ../build
+	cd "$pkgname"
+	cd build
 	make DESTDIR="$pkgdir" install
 }
