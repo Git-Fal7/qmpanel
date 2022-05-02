@@ -36,6 +36,7 @@
 #include <QMenu>
 #include <QResizeEvent>
 #include <QWidgetAction>
+#include <QIcon>
 
 struct Category
 {
@@ -190,7 +191,11 @@ MainMenuButton::MainMenuButton(Resources & res, QWidget * parent)
     : QToolButton(parent)
 {
     setAutoRaise(true);
-    setIcon(res.getIcon(res.settings().menuIcon));
+    if (res.getIcon(res.settings().menuIcon).isNull()) {
+        setIcon(QIcon::fromTheme("start-here"));
+    } else {
+        setIcon(res.getIcon(res.settings().menuIcon));
+    }
     setMenu(new MainMenu(res, this));
     setPopupMode(InstantPopup);
     setStyleSheet("QToolButton::menu-indicator { image: none; }");
